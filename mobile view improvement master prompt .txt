@@ -1,0 +1,576 @@
+MASTER PROMPT — MOBILE EXPERIENCE REDESIGN (DO NOT MODIFY DESKTOP)
+Objective
+
+Redesign the mobile experience only for the Super Sweet & Bakers website.
+
+IMPORTANT:
+The current desktop UI is already finalized and approved. Do not modify the desktop layout, spacing, typography, component hierarchy, interactions, or styling. All changes must be isolated to mobile breakpoints only.
+
+Desktop must remain pixel-perfect.
+
+Target breakpoints:
+
+Mobile: <768px
+Tablet: 768px–1023px
+Desktop: 1024px+
+Global Mobile Philosophy
+
+Do NOT simply shrink the desktop.
+
+Instead, redesign the mobile experience as a premium bakery application.
+
+Goals:
+
+luxurious
+modern
+minimal
+emotional
+conversion-focused
+thumb-friendly
+easy ordering
+premium whitespace
+clean hierarchy
+
+Every section should feel intentional.
+
+SECTION 1 — Navbar
+
+Replace desktop navigation with a compact mobile navigation.
+
+Layout:
+
+☰             SUPER             🛒
+
+Rules:
+
+Hamburger on left
+Logo centered
+Cart on right
+Remove desktop links
+Remove wishlist icon
+Remove search icon from navbar
+Keep navbar height around 64px
+Sticky while scrolling
+Slight backdrop blur
+Soft shadow while scrolling
+
+Hamburger menu should contain:
+
+Home
+Shop
+Categories
+Custom Cakes
+Gallery
+About
+Visit
+Contact
+
+Bottom:
+
+Login
+
+Wishlist
+
+Orders
+
+SECTION 2 — Hero (Complete Mobile Redesign)
+
+Desktop hero MUST remain unchanged.
+
+On mobile:
+
+Remove:
+
+split layout
+right-side bakery image
+floating Fresh Today card
+feature row
+dual CTA buttons
+
+Instead:
+
+Use the bakery image as a full-width hero background.
+
+█████████████████████
+
+Where Cravings
+Meet Magic
+
+Handcrafted cakes,
+made with heart.
+
+[ Order Now ]
+
+Explore Our Collection ↓
+
+█████████████████████
+
+Requirements:
+
+Background image:
+
+full width
+cover
+center
+responsive
+
+Overlay:
+
+Use warm dark gradient.
+
+Example:
+
+Top
+
+20%
+
+Middle
+
+40%
+
+Bottom
+
+65%
+
+Text:
+
+Centered
+
+Maximum width:
+
+320px
+
+Typography:
+
+Large headline
+
+Comfortable spacing
+
+Single CTA only.
+
+Button:
+
+Filled
+
+Large touch target
+
+Rounded
+
+Premium shadow
+
+Do NOT add another hero button.
+
+SECTION 3 — Hero Scroll Indicator
+
+Instead of:
+
+Scroll Down
+
+Use:
+
+Explore Our Collection ↓
+
+Animated gently.
+
+Clicking scrolls smoothly to Categories.
+
+SECTION 4 — Feature Row
+
+Desktop:
+
+Leave unchanged.
+
+Mobile:
+
+Convert into horizontal swipe cards.
+
+Example:
+
+Fresh Daily
+
+Premium Ingredients
+
+Custom Cakes
+
+Made With Love
+
+Small rounded cards.
+
+Snap scrolling.
+
+SECTION 5 — Categories
+
+Desktop cards remain unchanged.
+
+On mobile:
+
+Convert into horizontal scrolling cards.
+
+Examples:
+
+🍰 Cakes
+
+🥐 Pastries
+
+🍫 Brownies
+
+🍪 Cookies
+
+🎂 Birthday
+
+🧁 Cupcakes
+
+Rounded cards.
+
+Large touch targets.
+
+SECTION 6 — Product Grid
+
+Desktop:
+
+4-column grid.
+
+DO NOT TOUCH.
+
+Mobile:
+
+Single-column layout.
+
+Each card:
+
+Large image
+
+Name
+
+Rating
+
+Price
+
+Add to Cart
+
+Plenty of spacing.
+
+Rounded corners.
+
+Premium shadow.
+
+Card width:
+
+Almost full width.
+
+SECTION 7 — Shop All
+
+Instead of a centered button.
+
+Use:
+
+View All Products →
+
+Simple.
+
+Elegant.
+
+SECTION 8 — NEW Premium Custom Cake Section
+
+This section does NOT replace anything.
+
+Insert after:
+
+Best Sellers
+
+Before:
+
+Why Choose Us
+
+Purpose:
+
+Highlight the bakery's premium service.
+
+Design:
+
+Different background.
+
+Warm brown / soft gold gradient.
+
+Large premium cake image.
+
+Content:
+
+Create Your Dream Cake
+
+Every celebration deserves something unforgettable.
+
+✔ Choose Flavor
+
+✔ Select Size
+
+✔ Upload Inspiration
+
+✔ Add Personal Message
+
+[ Design Your Cake ]
+
+Section should feel premium.
+
+Use larger spacing than other sections.
+
+Rounded image.
+
+Soft animations.
+
+SECTION 9 — Why Choose Us
+
+Desktop:
+
+Keep grid.
+
+Mobile:
+
+Two cards per row.
+
+Large spacing.
+
+Rounded.
+
+Minimal shadows.
+
+SECTION 10 — Reviews
+
+Desktop:
+
+Leave exactly the same.
+
+Mobile:
+
+Horizontal swipe.
+
+One review per screen.
+
+Snap scrolling.
+
+Cards retain slight rotation.
+
+SECTION 11 — Statistics
+
+Desktop unchanged.
+
+Mobile:
+
+2×2 grid.
+
+4.9/5
+
+600+
+
+100%
+
+Verified
+
+Centered.
+
+SECTION 12 — Community
+
+Current section has too much empty space.
+
+Reduce height.
+
+Merge with social content.
+
+Could include:
+
+Instagram gallery preview.
+
+SECTION 13 — Newsletter
+
+Reduce height.
+
+Only:
+
+Headline
+
+Input
+
+Button
+
+SECTION 14 — Footer
+
+Desktop unchanged.
+
+Mobile:
+
+Accordion.
+
+Shop +
+
+Information +
+
+Contact +
+
+Social +
+
+Avoid long scrolling.
+
+SECTION 15 — Sticky Bottom Navigation
+
+Add only on mobile.
+
+🏠
+
+🍰
+
+❤️
+
+🛒
+
+👤
+
+Home
+
+Shop
+
+Wishlist
+
+Cart
+
+Profile
+
+Rounded top corners.
+
+Backdrop blur.
+
+Soft shadow.
+
+SECTION 16 — Sticky Order Button
+
+Optional.
+
+If bottom navigation exists:
+
+Do NOT add another sticky button.
+
+Avoid clutter.
+
+SECTION 17 — Search
+
+Instead of search icon.
+
+Create:
+
+🔍 Search Cakes...
+
+Place above categories.
+
+Large input.
+
+Rounded.
+
+SECTION 18 — Mobile Spacing
+
+Reduce vertical spacing.
+
+Desktop spacing:
+
+120px
+
+Mobile:
+
+60px–72px
+
+Maintain premium breathing room.
+
+SECTION 19 — Animations
+
+Use subtle animations only.
+
+Hero:
+
+Fade up.
+
+Cards:
+
+Fade + slight translate.
+
+Buttons:
+
+Scale on tap.
+
+Reviews:
+
+Snap carousel.
+
+Category chips:
+
+Smooth scrolling.
+
+Avoid excessive motion.
+
+SECTION 20 — Performance
+
+Optimize mobile.
+
+Lazy-load images
+Responsive image sizes
+Maintain Lighthouse score above 90
+Keep animations GPU-accelerated
+Ensure touch targets are at least 44×44px
+Final Mobile Flow
+Announcement Bar
+
+↓
+
+Sticky Navbar
+
+↓
+
+Hero
+(Background Image)
+
+↓
+
+Search
+
+↓
+
+Categories
+
+↓
+
+Best Sellers
+
+↓
+
+Create Your Dream Cake
+
+↓
+
+Why Choose Us
+
+↓
+
+Reviews
+
+↓
+
+Statistics
+
+↓
+
+Community
+
+↓
+
+Newsletter
+
+↓
+
+Footer
+
+↓
+
+Sticky Bottom Navigation
+Critical Instructions
+DO NOT MODIFY THE DESKTOP EXPERIENCE.
+All new layouts must be activated only below the mobile breakpoint.
+Reuse existing components where practical, but create mobile-specific layouts when necessary (especially for the hero).
+Preserve the existing color palette, typography, branding, and visual identity.
+The final mobile design should feel like a premium native bakery app, while the desktop experience remains exactly as it is today.

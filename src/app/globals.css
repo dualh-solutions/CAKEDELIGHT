@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-fredoka: var(--font-fredoka);
+  --font-inter: var(--font-inter);
+  --font-poppins: var(--font-poppins);
+
+  /* Attock Cake Delight Custom Brand Colors */
+  --color-brand-vanilla: #F6EFE6;
+  --color-brand-milk-chocolate: #A17454;
+  --color-brand-caramel: #D49B4B;
+  --color-brand-cherry: #E7706D;
+  --color-brand-cocoa: #4A2E1B;
+  --color-brand-espresso: #2A1810;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+@layer base {
+  :root {
+    --background: #F6EFE6; /* Warm Vanilla */
+    --foreground: #4A2E1B; /* Deep Cocoa */
+
+    --card: #FFFFFF;
+    --card-foreground: #4A2E1B;
+
+    --popover: #FFFFFF;
+    --popover-foreground: #4A2E1B;
+
+    --primary: #A17454; /* Milk Chocolate */
+    --primary-foreground: #FFFFFF;
+
+    --secondary: #D49B4B; /* Caramel */
+    --secondary-foreground: #FFFFFF;
+
+    --muted: #EFE6DB;
+    --muted-foreground: #A17454;
+
+    --accent: #E7706D; /* Cherry Blush */
+    --accent-foreground: #FFFFFF;
+
+    --destructive: #E7706D;
+    --destructive-foreground: #ffffff;
+
+    --border: #EFE6DB;
+    --input: #EFE6DB;
+    --ring: #D49B4B;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: #2A1810; /* Espresso */
+    --foreground: #F6EFE6; /* Warm Vanilla */
+
+    --card: #3D2314;
+    --card-foreground: #F6EFE6;
+
+    --popover: #3D2314;
+    --popover-foreground: #F6EFE6;
+
+    --primary: #D49B4B; /* Caramel */
+    --primary-foreground: #2A1810;
+
+    --secondary: #A17454; /* Milk Chocolate */
+    --secondary-foreground: #F6EFE6;
+
+    --muted: #4A2E1B;
+    --muted-foreground: #D49B4B;
+
+    --accent: #E7706D; /* Cherry Blush */
+    --accent-foreground: #F6EFE6;
+
+    --destructive: #E7706D;
+    --destructive-foreground: #F6EFE6;
+
+    --border: #4A2E1B;
+    --input: #4A2E1B;
+    --ring: #D49B4B;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-poppins antialiased;
+  }
+}
