@@ -121,6 +121,8 @@ export default function AdminDashboardPage() {
         ...prev,
         newCustomers: snapshot.size
       }));
+    }, (error) => {
+      console.error("Error fetching customers for dashboard:", error);
     });
 
     // Out of Stock Products
@@ -130,6 +132,8 @@ export default function AdminDashboardPage() {
         if (doc.data().isAvailable === false) outOfStock++;
       });
       setQuickActions(prev => ({ ...prev, outOfStock }));
+    }, (error) => {
+      console.error("Error fetching products for dashboard:", error);
     });
 
     // Custom Orders (pending/new)
@@ -140,6 +144,8 @@ export default function AdminDashboardPage() {
         if (status === "new" || status === "pending") customOrders++;
       });
       setQuickActions(prev => ({ ...prev, customOrders }));
+    }, (error) => {
+      console.error("Error fetching custom orders for dashboard:", error);
     });
 
     // Branches (inactive)
@@ -149,6 +155,8 @@ export default function AdminDashboardPage() {
         if (doc.data().status === "inactive") inactiveBranches++;
       });
       setQuickActions(prev => ({ ...prev, inactiveBranches }));
+    }, (error) => {
+      console.error("Error fetching branches for dashboard:", error);
     });
 
     return () => {

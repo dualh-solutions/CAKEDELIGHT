@@ -63,6 +63,8 @@ export default function ProductDetailsPage() {
       snapshot.forEach(doc => r.push({ id: doc.id, ...doc.data() }));
       r.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
       setReviews(r);
+    }, (error) => {
+      console.error("Error fetching reviews:", error);
     });
     return () => unsubscribe();
   }, [params.id]);

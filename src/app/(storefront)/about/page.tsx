@@ -39,7 +39,7 @@ export default function AboutPage() {
               src="/images/super-sweets-storefront.jpg" 
               alt="Attock Cake Delight Storefront in Attock" 
               className="w-full h-full object-cover"
-              onError={(e) => { (e.target as HTMLImageElement).src = "/images/Attock Cake Delight-hero-placeholder.webp" }}
+              onError={(e) => { (e.target as HTMLImageElement).src = "/images/cakoo-hero-placeholder.webp" }}
             />
             <div className="absolute inset-0 bg-black/10" />
           </motion.div>

@@ -10,14 +10,20 @@ export function InstagramGallery() {
   const [images, setImages] = useState<string[]>([]);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "gallery"), (snapshot) => {
-      const urls: string[] = [];
-      snapshot.forEach((doc) => {
-        const data = doc.data();
-        if (data.url && data.section === "community") urls.push(data.url);
-      });
-      setImages(urls.slice(0, 6));
-    });
+    const unsubscribe = onSnapshot(
+      collection(db, "gallery"), 
+      (snapshot) => {
+        const urls: string[] = [];
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          if (data.url && data.section === "community") urls.push(data.url);
+        });
+        setImages(urls.slice(0, 6));
+      },
+      (error) => {
+        console.error("Error fetching gallery images:", error);
+      }
+    );
 
     return () => unsubscribe();
   }, []);

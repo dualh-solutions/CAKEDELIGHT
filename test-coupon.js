@@ -5,7 +5,7 @@ const { getFirestore } = require('firebase-admin/firestore');
 const fs = require('fs');
 
 const envContent = fs.readFileSync('.env.local', 'utf-8');
-envContent.split('\n').forEach(line => {
+envContent.split(/\r?\n/).forEach(line => {
   const match = line.match(/^([^=]+)=(.*)$/);
   if (match) {
     const key = match[1].trim();

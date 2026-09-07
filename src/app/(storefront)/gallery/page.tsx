@@ -24,16 +24,23 @@ export default function GalleryPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "gallery"), (snapshot) => {
-      const fetchedItems: GalleryItem[] = [];
-      snapshot.forEach((doc) => {
-        fetchedItems.push({ id: doc.id, ...doc.data() } as GalleryItem);
-      });
-      // Sort by newest first
-      fetchedItems.sort((a, b) => b.createdAt - a.createdAt);
-      setItems(fetchedItems);
-      setLoading(false);
-    });
+    const unsubscribe = onSnapshot(
+      collection(db, "gallery"), 
+      (snapshot) => {
+        const fetchedItems: GalleryItem[] = [];
+        snapshot.forEach((doc) => {
+          fetchedItems.push({ id: doc.id, ...doc.data() } as GalleryItem);
+        });
+        // Sort by newest first
+        fetchedItems.sort((a, b) => b.createdAt - a.createdAt);
+        setItems(fetchedItems);
+        setLoading(false);
+      },
+      (error) => {
+        console.error("Error fetching gallery items:", error);
+        setLoading(false);
+      }
+    );
 
     return () => unsubscribe();
   }, []);

@@ -251,7 +251,7 @@ export function Hero() {
               {/* PENDING REAL PHOTO: Update with actual Attock Cake Delight interior or best-looking cake */}
               <motion.img 
                 style={{ scale: scaleImage, ...gpuAcceleration }}
-                src="/images/Attock Cake Delight-hero-placeholder.webp" 
+                src="/images/cakoo-hero-placeholder.webp" 
                 alt="Attock Cake Delight Interior" 
                 className="w-full h-full object-cover origin-center transition-transform duration-[3000ms]"
               />
@@ -267,7 +267,7 @@ export function Hero() {
             >
               {/* PENDING REAL PHOTO: Update with actual Attock Cake Delight product photo */}
               <img 
-                src="/images/Attock Cake Delight-floating-placeholder.webp" 
+                src="/images/cakoo-floating-placeholder.webp" 
                 alt="Fresh Bakes" 
                 className="w-full h-full object-cover"
               />

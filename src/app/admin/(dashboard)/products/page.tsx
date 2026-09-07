@@ -19,6 +19,23 @@ export default function AdminProductsPage() {
   
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isSeeding, setIsSeeding] = useState(false);
+
+  const handleSeedProducts = async () => {
+    try {
+      setIsSeeding(true);
+      const res = await fetch("/api/migrate?secret=cakoo123");
+      const data = await res.json();
+      if (!data.success) {
+        alert("Failed to seed products: " + (data.error || "Unknown error"));
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error seeding products");
+    } finally {
+      setIsSeeding(false);
+    }
+  };
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "products"), (snapshot) => {
@@ -89,7 +106,19 @@ export default function AdminProductsPage() {
         {loading ? (
           <div className="p-12 text-center text-slate-500">Loading products...</div>
         ) : filteredProducts.length === 0 ? (
-          <div className="p-12 text-center text-slate-500">No products found.</div>
+          <div className="p-12 text-center text-slate-500 flex flex-col items-center justify-center gap-3">
+            <p className="font-medium text-slate-700">No products found.</p>
+            {products.length === 0 && (
+              <Button 
+                onClick={handleSeedProducts} 
+                disabled={isSeeding}
+                variant="outline"
+                className="mt-2 border-slate-300 text-slate-700 hover:bg-slate-50"
+              >
+                {isSeeding ? "Seeding Menu..." : "Load Default Products Menu"}
+              </Button>
+            )}
+          </div>
         ) : (
           <>
             <div className="hidden md:block overflow-x-auto">
