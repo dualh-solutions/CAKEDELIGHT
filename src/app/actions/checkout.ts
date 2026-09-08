@@ -41,8 +41,26 @@ export async function validateCouponAction(code: string) {
 
 export async function submitOrderAction(orderData: any) {
   try {
+    if (!adminDb) {
+      console.error("Firebase Admin DB not initialized");
+      return { success: false, error: "Database service unavailable. Please try again later." };
+    }
+
     const docRef = await adminDb.collection("orders").add({
-      ...orderData,
+      customerName: orderData.customerName || "Customer",
+      customerPhone: orderData.customerPhone || "",
+      fulfillmentMethod: orderData.fulfillmentMethod || "delivery",
+      address: orderData.address || "",
+      branchId: orderData.branchId || "",
+      branchName: orderData.branchName || "",
+      items: orderData.items || [],
+      subtotal: orderData.subtotal || 0,
+      discountAmount: orderData.discountAmount || 0,
+      couponCode: orderData.couponCode || null,
+      deliveryFee: orderData.deliveryFee || 0,
+      totalAmount: orderData.totalAmount || 0,
+      status: orderData.status || "pending",
+      source: orderData.source || "whatsapp",
       createdAt: FieldValue.serverTimestamp(),
     });
 

@@ -16,11 +16,17 @@ interface Order {
   customerName: string;
   customerPhone: string;
   totalAmount: number;
+  subtotal?: number;
+  discountAmount?: number;
+  deliveryFee?: number;
+  couponCode?: string;
   status: 'pending' | 'processing' | 'delivered' | 'cancelled';
   createdAt: any;
   items: any[];
   address?: string;
   fulfillmentMethod?: string;
+  branchName?: string;
+  branchId?: string;
 }
 
 export default function AdminOrdersPage() {
@@ -264,8 +270,11 @@ export default function AdminOrdersPage() {
                       <MapPin className="w-4 h-4 text-slate-400" /> Fulfillment
                     </h4>
                     <p className="text-sm font-medium text-slate-700 capitalize">{selectedOrder.fulfillmentMethod || 'Delivery'}</p>
+                    {selectedOrder.branchName && (
+                      <p className="text-xs text-slate-500 font-medium mt-0.5">Branch: {selectedOrder.branchName}</p>
+                    )}
                     {selectedOrder.address && (
-                      <p className="text-sm text-slate-500">{selectedOrder.address}</p>
+                      <p className="text-sm text-slate-500 mt-1">{selectedOrder.address}</p>
                     )}
                   </div>
                 </div>
@@ -275,21 +284,57 @@ export default function AdminOrdersPage() {
                     <Package className="w-4 h-4 text-slate-400" /> Order Items
                   </h4>
                   <div className="space-y-3">
-                    {selectedOrder.items?.map((item, idx) => (
-                      <div key={idx} className="flex justify-between text-sm">
-                        <div className="flex-1 pr-4">
-                          <p className="font-medium text-slate-900">{item.quantity || 1}x {item.name}</p>
-                          {item.message && <p className="text-xs text-slate-500 mt-0.5">Inscription: "{item.message}"</p>}
+                    {selectedOrder.items?.map((item, idx) => {
+                      const options = [];
+                      if (item.selectedFlavor) options.push(`Flavor: ${item.selectedFlavor}`);
+                      if (item.selectedWeight) options.push(`Weight: ${item.selectedWeight}`);
+                      if (item.selectedSize) options.push(`Size: ${item.selectedSize}`);
+
+                      return (
+                        <div key={idx} className="border-b border-slate-100 pb-2 last:border-0 last:pb-0">
+                          <div className="flex justify-between text-sm">
+                            <div className="flex-1 pr-4">
+                              <p className="font-medium text-slate-900">{item.quantity || 1}x {item.name}</p>
+                              {options.length > 0 && (
+                                <p className="text-xs text-slate-500 mt-0.5">{options.join(' • ')}</p>
+                              )}
+                              {item.description && item.id?.startsWith('custom-cake') && (
+                                <p className="text-xs text-slate-600 mt-1 bg-white p-2 rounded border border-slate-100 whitespace-pre-wrap">{item.description}</p>
+                              )}
+                              {item.message && <p className="text-xs text-primary font-medium mt-0.5">Message: "{item.message}"</p>}
+                            </div>
+                            <span className="font-semibold text-slate-900 whitespace-nowrap">
+                              Rs. {(item.price * (item.quantity || 1)).toLocaleString()}
+                            </span>
+                          </div>
                         </div>
-                        <span className="font-semibold text-slate-900 whitespace-nowrap">
-                          Rs. {(item.price * (item.quantity || 1)).toLocaleString()}
-                        </span>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
-                  <div className="pt-3 border-t border-slate-200 flex justify-between items-center font-bold text-lg text-primary">
-                    <span>Total</span>
-                    <span>Rs. {selectedOrder.totalAmount?.toLocaleString() || 0}</span>
+                  
+                  <div className="pt-3 border-t border-slate-200 space-y-1 text-sm">
+                    {selectedOrder.subtotal !== undefined && selectedOrder.subtotal > 0 && (
+                      <div className="flex justify-between text-slate-500 text-xs">
+                        <span>Subtotal</span>
+                        <span>Rs. {selectedOrder.subtotal.toLocaleString()}</span>
+                      </div>
+                    )}
+                    {selectedOrder.discountAmount !== undefined && selectedOrder.discountAmount > 0 && (
+                      <div className="flex justify-between text-green-600 text-xs font-medium">
+                        <span>Discount ({selectedOrder.couponCode || 'Coupon'})</span>
+                        <span>-Rs. {selectedOrder.discountAmount.toLocaleString()}</span>
+                      </div>
+                    )}
+                    {selectedOrder.deliveryFee !== undefined && selectedOrder.deliveryFee > 0 && (
+                      <div className="flex justify-between text-slate-500 text-xs">
+                        <span>Delivery</span>
+                        <span>Rs. {selectedOrder.deliveryFee.toLocaleString()}</span>
+                      </div>
+                    )}
+                    <div className="flex justify-between items-center font-bold text-lg text-primary pt-2">
+                      <span>Total</span>
+                      <span>Rs. {selectedOrder.totalAmount?.toLocaleString() || 0}</span>
+                    </div>
                   </div>
                 </div>
               </div>

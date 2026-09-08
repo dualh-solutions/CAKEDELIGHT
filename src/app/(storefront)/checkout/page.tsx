@@ -116,54 +116,108 @@ export default function CheckoutPage() {
 
     setIsSubmitting(true);
     
-    const customerName = `${formData.firstName} ${formData.lastName}`.trim();
-    const branchName = Object.values(BRANCHES).find(b => b.id === selectedBranchId)?.name || 'Unknown Branch';
-    
-    let message = `🎂 *New Order - Attock Cake Delight*\n\n`;
-    message += `*Customer:* ${customerName}\n`;
-    message += `*Phone:* ${formData.phone}\n`;
-    message += `*Branch:* ${branchName}\n`;
-    message += `*Method:* ${formData.fulfillmentMethod === 'delivery' ? 'Delivery' : 'Store Pickup'}\n`;
-    
-    if (formData.fulfillmentMethod === 'delivery' && formData.address) {
-      message += `*Address:* ${formData.address}\n`;
-    }
-    
-    message += `\n*Order Details:*\n`;
-    
-    items.forEach(item => {
-      message += `• ${item.quantity}x ${item.name}`;
+    // Open window early to prevent browser popup blockers during async await
+    const targetWin = typeof window !== 'undefined' ? window.open('about:blank', '_blank') : null;
+
+    try {
+      const customerName = `${formData.firstName} ${formData.lastName}`.trim();
+      const branchName = Object.values(BRANCHES).find(b => b.id === selectedBranchId)?.name || 'Unknown Branch';
       
-      if (item.id.startsWith('custom-cake')) {
-        message += `\n  *Details:* ${item.description}`;
-      } else {
-        const details = [];
-        if (item.selectedFlavor) details.push(item.selectedFlavor);
-        if (item.selectedWeight) details.push(item.selectedWeight);
-        if (item.selectedSize) details.push(item.selectedSize);
-        
-        if (details.length > 0) {
-          message += ` (${details.join(', ')})`;
-        }
-        
-        if (item.message) {
-          message += `\n  *Cake Message:* "${item.message}"`;
-        }
+      const orderPayload = {
+        customerName,
+        customerPhone: formData.phone,
+        fulfillmentMethod: formData.fulfillmentMethod,
+        address: formData.fulfillmentMethod === 'delivery' ? formData.address : "",
+        branchId: selectedBranchId,
+        branchName,
+        items: items.map(item => ({
+          id: item.id,
+          name: item.name,
+          quantity: item.quantity,
+          price: item.price,
+          description: item.description || "",
+          message: item.message || "",
+          selectedFlavor: item.selectedFlavor || "",
+          selectedWeight: item.selectedWeight || "",
+          selectedSize: item.selectedSize || ""
+        })),
+        subtotal,
+        discountAmount,
+        couponCode: appliedCoupon?.code || null,
+        deliveryFee: delivery,
+        totalAmount: total,
+        status: 'pending',
+        source: 'whatsapp'
+      };
+
+      const res = await submitOrderAction(orderPayload);
+      
+      let message = `🎂 *New Order - Attock Cake Delight*\n`;
+      if (res.success && res.orderId) {
+        message += `*Order ID:* #${res.orderId.slice(0, 8).toUpperCase()}\n`;
       }
-      message += `\n`;
-    });
-    
-    setTimeout(() => {
+      message += `\n*Customer:* ${customerName}\n`;
+      message += `*Phone:* ${formData.phone}\n`;
+      message += `*Branch:* ${branchName}\n`;
+      message += `*Method:* ${formData.fulfillmentMethod === 'delivery' ? 'Delivery' : 'Store Pickup'}\n`;
+      
+      if (formData.fulfillmentMethod === 'delivery' && formData.address) {
+        message += `*Address:* ${formData.address}\n`;
+      }
+      
+      message += `\n*Order Details:*\n`;
+      
+      items.forEach(item => {
+        message += `• ${item.quantity}x ${item.name}`;
+        
+        if (item.id.startsWith('custom-cake')) {
+          message += `\n  *Details:* ${item.description}`;
+        } else {
+          const details = [];
+          if (item.selectedFlavor) details.push(item.selectedFlavor);
+          if (item.selectedWeight) details.push(item.selectedWeight);
+          if (item.selectedSize) details.push(item.selectedSize);
+          
+          if (details.length > 0) {
+            message += ` (${details.join(', ')})`;
+          }
+          
+          if (item.message) {
+            message += `\n  *Cake Message:* "${item.message}"`;
+          }
+        }
+        message += `\n`;
+      });
+      
+      message += `\n*Total Amount:* Rs. ${total.toLocaleString()}`;
+
       const whatsappNumber = "923327659882";
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
       
-      toast.success("Redirecting to WhatsApp...");
+      toast.success("Order saved! Redirecting to WhatsApp...");
       clearCart();
       setIsSubmitting(false);
       
-      window.open(whatsappUrl, '_blank');
+      if (targetWin) {
+        targetWin.location.href = whatsappUrl;
+      } else {
+        window.location.href = whatsappUrl;
+      }
       router.push("/");
-    }, 800);
+
+    } catch (error) {
+      console.error("Order submission error:", error);
+      toast.error("An error occurred while saving order. Redirecting to WhatsApp...");
+      setIsSubmitting(false);
+      
+      // Fallback redirect if error occurred
+      const fallbackUrl = `https://wa.me/923327659882`;
+      if (targetWin) {
+        targetWin.location.href = fallbackUrl;
+      } else {
+        window.location.href = fallbackUrl;
+      }
+    }
   };
 
   if (items.length === 0) {
