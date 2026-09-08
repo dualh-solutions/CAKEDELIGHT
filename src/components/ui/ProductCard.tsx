@@ -183,16 +183,16 @@ export function ProductCard({ product, index }: ProductCardProps) {
 
           {/* Price & Add to Box Button */}
           <div className="flex flex-col gap-2 mt-auto pt-2 border-t border-black/5">
-            <div className="font-poppins font-bold text-[16px] text-primary tracking-wide">
+            <div className="font-poppins font-bold text-[16px] text-[#A17454] tracking-wide">
               Rs. {product.price.toLocaleString()}
             </div>
 
             <Button 
               type="button"
-              className="w-full rounded-full bg-text-primary text-white active:bg-primary hover:bg-primary transition-all shadow-md h-10 min-h-[40px] text-[13px] font-semibold tracking-wide flex items-center justify-center gap-1.5"
+              className="w-full rounded-full bg-[#2A1810] text-white hover:bg-[#4A2E1B] active:scale-95 transition-all shadow-md h-10 min-h-[40px] text-[13px] font-bold tracking-wide flex items-center justify-center gap-1.5 cursor-pointer z-30"
               onClick={handleAddToCart}
             >
-              <ShoppingBag className="w-4 h-4" /> Add to Box
+              <ShoppingBag className="w-4 h-4 text-white shrink-0" /> Add to Box
             </Button>
           </div>
         </div>

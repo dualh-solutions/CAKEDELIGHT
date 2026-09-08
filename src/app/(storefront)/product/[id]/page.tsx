@@ -332,7 +332,7 @@ export default function ProductDetailsPage() {
                 </div>
                 <Button 
                   onClick={handleAddToCart}
-                  className="w-full flex-1 rounded-full py-6 text-[17px] md:text-[18px] font-semibold bg-text-primary text-primary-foreground hover:bg-text-primary/90 min-h-[48px]"
+                  className="w-full flex-1 rounded-full py-6 text-[17px] md:text-[18px] font-semibold bg-[#2A1810] text-white hover:bg-[#4A2E1B] min-h-[48px]"
                 >
                   Add to My Box — Rs. {(currentPrice * quantity).toLocaleString()}
                 </Button>
@@ -467,7 +467,7 @@ export default function ProductDetailsPage() {
         </div>
         <Button 
           onClick={handleAddToCart}
-          className="flex-1 rounded-full py-5 text-sm font-semibold bg-text-primary text-primary-foreground hover:bg-text-primary/90 shadow-md min-h-[44px]"
+          className="flex-1 rounded-full py-5 text-sm font-semibold bg-[#2A1810] text-white hover:bg-[#4A2E1B] shadow-md min-h-[44px]"
         >
           Add to Box — Rs. {(currentPrice * quantity).toLocaleString()}
         </Button>
