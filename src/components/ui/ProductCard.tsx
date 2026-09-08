@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Product } from "@/lib/mockData";
-import { Heart, ShoppingBag, Eye, Star } from "lucide-react";
+import { Heart, ShoppingBag, Eye, Star, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useCartStore } from "@/store/cartStore";
@@ -181,18 +181,20 @@ export function ProductCard({ product, index }: ProductCardProps) {
             </div>
           )}
 
-          {/* Price & Add to Box Button */}
-          <div className="flex flex-col gap-2 mt-auto pt-2 border-t border-black/5">
-            <div className="font-poppins font-bold text-[16px] text-[#A17454] tracking-wide">
+          {/* Price & Compact + Button */}
+          <div className="flex items-center justify-between mt-auto pt-2 border-t border-black/5">
+            <div className="font-poppins font-bold text-[15px] text-[#A17454] tracking-wide">
               Rs. {product.price.toLocaleString()}
             </div>
 
             <Button 
               type="button"
-              className="w-full rounded-full bg-[#2A1810] text-white hover:bg-[#4A2E1B] active:scale-95 transition-all shadow-md h-10 min-h-[40px] text-[13px] font-bold tracking-wide flex items-center justify-center gap-1.5 cursor-pointer z-30"
+              size="icon"
+              className="w-8 h-8 rounded-full bg-[#2A1810] text-white hover:bg-[#4A2E1B] active:scale-90 transition-all shadow-md flex items-center justify-center cursor-pointer z-30 shrink-0"
               onClick={handleAddToCart}
+              aria-label="Add to box"
             >
-              <ShoppingBag className="w-4 h-4 text-white shrink-0" /> Add to Box
+              <Plus className="w-4 h-4 text-white stroke-[2.5]" />
             </Button>
           </div>
         </div>
