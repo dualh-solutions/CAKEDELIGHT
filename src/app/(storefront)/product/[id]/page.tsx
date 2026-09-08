@@ -443,7 +443,7 @@ export default function ProductDetailsPage() {
 
         {/* Related Products */}
         {relatedProducts.length > 0 && (
-          <div>
+          <div className="pb-16 md:pb-0">
             <h2 className="font-fredoka text-3xl font-bold mb-8 text-center md:text-left">You May Also Like</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
               {relatedProducts.map((p, i) => (
@@ -452,6 +452,25 @@ export default function ProductDetailsPage() {
             </div>
           </div>
         )}
+      </div>
+
+      {/* Sticky Mobile Add to Box Bar */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-border-light p-3 shadow-[0_-4px_25px_rgba(0,0,0,0.1)] flex items-center justify-between gap-3">
+        <div className="flex items-center justify-between border border-border-light rounded-full p-1 bg-bg-light shrink-0">
+          <Button variant="ghost" size="icon" className="w-8 h-8 rounded-full" onClick={() => setQuantity(Math.max(1, quantity - 1))}>
+            <Minus className="w-3.5 h-3.5" />
+          </Button>
+          <span className="w-7 text-center font-medium text-sm">{quantity}</span>
+          <Button variant="ghost" size="icon" className="w-8 h-8 rounded-full" onClick={() => setQuantity(quantity + 1)}>
+            <Plus className="w-3.5 h-3.5" />
+          </Button>
+        </div>
+        <Button 
+          onClick={handleAddToCart}
+          className="flex-1 rounded-full py-5 text-sm font-semibold bg-text-primary text-primary-foreground hover:bg-text-primary/90 shadow-md min-h-[44px]"
+        >
+          Add to Box — Rs. {(currentPrice * quantity).toLocaleString()}
+        </Button>
       </div>
     </div>
   );
